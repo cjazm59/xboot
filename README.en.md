@@ -1,36 +1,33 @@
 # xboot
 
-#### Description
-{**When you're done, you can delete the content in this README and update the file with details for others getting started with your repository**}
+#简介
+xboot脚手架,基于spring体系框架,为简化开发而创建
+#
 
-#### Software Architecture
-Software architecture description
-
-#### Installation
-
-1.  xxxx
-2.  xxxx
-3.  xxxx
-
-#### Instructions
-
-1.  xxxx
-2.  xxxx
-3.  xxxx
-
-#### Contribution
-
-1.  Fork the repository
-2.  Create Feat_xxx branch
-3.  Commit your code
-4.  Create Pull Request
+#### 核心组件库
+ * x-mybatis
+ * x-message-api
+ * x-lock-api
 
 
-#### Gitee Feature
+### x-mybatis 
+   基于mybatis扩展,解放xml文件,只需简单使用注解,即可完成单表crud操作
+```
 
-1.  You can use Readme\_XXX.md to support different languages, such as Readme\_en.md, Readme\_zh.md
-2.  Gitee blog [blog.gitee.com](https://blog.gitee.com)
-3.  Explore open source project [https://gitee.com/explore](https://gitee.com/explore)
-4.  The most valuable open source project [GVP](https://gitee.com/gvp)
-5.  The manual of Gitee [https://gitee.com/help](https://gitee.com/help)
-6.  The most popular members  [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
+@Table("user")
+public class UserEo extends BaseEo {
+
+    @Column(value = "name")
+    private String name;
+}
+
+//继承BaseMapper后,拥有常用crud等方法
+@Mapper
+public interface UserMapper extends BaseMapper<UserEo, Long> {
+
+}
+```
+### x-message-api
+mq消息中间件
+### x-lock-api
+分布式锁

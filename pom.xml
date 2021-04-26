@@ -18,6 +18,7 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <mybatis.version>2.1.0</mybatis.version>
         <mybatis-provider.version>1.0.0-Preview</mybatis-provider.version>
+        <commons-lang3.version>3.8.1</commons-lang3.version>
     </properties>
 
 
@@ -56,6 +57,12 @@
                 <groupId>org.mybatis.spring.boot</groupId>
                 <artifactId>mybatis-spring-boot-starter</artifactId>
                 <version>${mybatis.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>${commons-lang3.version}</version>
             </dependency>
 
         </dependencies>

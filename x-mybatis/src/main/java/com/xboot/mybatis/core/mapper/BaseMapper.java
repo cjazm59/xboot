@@ -1,5 +1,6 @@
-package com.xboot.mybatis.core.base;
+package com.xboot.mybatis.core.mapper;
 
+import com.xboot.mybatis.core.support.entity.BaseEo;
 import io.mybatis.provider.Caching;
 import io.mybatis.provider.EntityInfoMapper;
 import org.apache.ibatis.annotations.*;
@@ -8,7 +9,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Optional;
 
-public interface BaseMapper<T extends BaseEo, P extends Serializable> extends EntityInfoMapper<T> {
+public interface BaseMapper<E extends BaseEo, P extends Serializable> extends EntityInfoMapper<E> {
 
     /**
      * 保存实体
@@ -18,7 +19,7 @@ public interface BaseMapper<T extends BaseEo, P extends Serializable> extends En
      */
     @Lang(Caching.class)
     @InsertProvider(type = ProviderTemplate.class, method = "insert")
-    int insert(T entity);
+    int insert(E entity);
 
     /**
      * 保存实体中不为空的字段
@@ -28,7 +29,7 @@ public interface BaseMapper<T extends BaseEo, P extends Serializable> extends En
      */
     @Lang(Caching.class)
     @InsertProvider(type = ProviderTemplate.class, method = "insertSelective")
-    int insertSelective(T entity);
+    int insertSelective(E entity);
 
     /**
      * 根据主键删除
@@ -48,7 +49,7 @@ public interface BaseMapper<T extends BaseEo, P extends Serializable> extends En
      */
     @Lang(Caching.class)
     @DeleteProvider(type = ProviderTemplate.class, method = "delete")
-    int delete(T entity);
+    int delete(E entity);
 
     /**
      * 根据主键更新实体
@@ -58,7 +59,7 @@ public interface BaseMapper<T extends BaseEo, P extends Serializable> extends En
      */
     @Lang(Caching.class)
     @UpdateProvider(type = ProviderTemplate.class, method = "updateByPrimaryKey")
-    int updateByPrimaryKey(T entity);
+    int updateByPrimaryKey(E entity);
 
     /**
      * 根据主键更新实体中不为空的字段
@@ -68,7 +69,7 @@ public interface BaseMapper<T extends BaseEo, P extends Serializable> extends En
      */
     @Lang(Caching.class)
     @UpdateProvider(type = ProviderTemplate.class, method = "updateByPrimaryKeySelective")
-    int updateByPrimaryKeySelective(T entity);
+    int updateByPrimaryKeySelective(E entity);
 
     /**
      * 根据主键查询实体
@@ -78,7 +79,7 @@ public interface BaseMapper<T extends BaseEo, P extends Serializable> extends En
      */
     @Lang(Caching.class)
     @SelectProvider(type = ProviderTemplate.class, method = "selectByPrimaryKey")
-    Optional<T> selectByPrimaryKey(P id);
+    Optional<E> selectByPrimaryKey(P id);
 
     /**
      * 根据实体字段条件查询唯一的实体
@@ -88,7 +89,7 @@ public interface BaseMapper<T extends BaseEo, P extends Serializable> extends En
      */
     @Lang(Caching.class)
     @SelectProvider(type = ProviderTemplate.class, method = "selectOne")
-    Optional<T> selectOne(T entity);
+    Optional<E> selectOne(E entity);
 
     /**
      * 根据实体字段条件批量查询
@@ -98,7 +99,7 @@ public interface BaseMapper<T extends BaseEo, P extends Serializable> extends En
      */
     @Lang(Caching.class)
     @SelectProvider(type = ProviderTemplate.class, method = "select")
-    List<T> selectList(T entity);
+    List<E> selectList(E entity);
 
     /**
      * 根据实体字段条件查询总数
@@ -108,7 +109,13 @@ public interface BaseMapper<T extends BaseEo, P extends Serializable> extends En
      */
     @Lang(Caching.class)
     @SelectProvider(type = ProviderTemplate.class, method = "selectCount")
-    long selectCount(T entity);
+    long selectCount(E entity);
+
+
+    @Lang(Caching.class)
+    @SelectProvider(type = ProviderTemplate.class, method = "test")
+    List<E> test(E entity);
+
 
 }
 

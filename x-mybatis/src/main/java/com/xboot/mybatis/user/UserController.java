@@ -1,46 +1,41 @@
 package com.xboot.mybatis.user;
 
+import com.xboot.mybatis.core.support.criteria.Criteria;
+import com.xboot.mybatis.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Optional;
-
+import java.util.List;
 
 @RestController
 @RequestMapping("/user")
 public class UserController {
 
     @Autowired
+    private IUserService userService;
+
+    @Autowired
     private UserMapper userMapper;
 
-    @RequestMapping("/selectCount")
-    public long selectCount() {
+    @RequestMapping("/selectOne")
+    public List<UserEo> selectOne() {
         UserEo u = new UserEo();
         u.setId(1L);
-        long count = userMapper.selectCount(u);
-        return count;
+        u.setCriteria(Criteria.build());
+//        UserDto userDto = userService.test(u);
+        List<UserEo> test = userMapper.test(u);
+        return test;
     }
 
-    @RequestMapping("/insertSelective")
-    public int insertSelective() {
+    @RequestMapping("/insert")
+    public int insert() {
         UserEo u = new UserEo();
-        u.setDepartment("xxxx");
-        u.setName("name");
         u.setIsDeleted(1);
-        int i = userMapper.insertSelective(u);
-        return i;
-    }
-    @RequestMapping("/selectOne")
-    public UserEo selectOne() {
-        UserEo u = new UserEo();
-        UserEo userEo = userMapper.selectOne(u).get();
-        return userEo;
-    }
-
-    @RequestMapping("/deleteByPrimaryKey")
-    public void deleteByPrimaryKey(Long id) {
-        userMapper.deleteByPrimaryKey(id);
+        u.setDepartment("xzvxcvx");
+        u.setName("00012012");
+        int insert = userService.insert(u);
+        return insert;
     }
 
 }

@@ -1,6 +1,7 @@
-package com.xboot.mybatis.core.base;
+package com.xboot.mybatis.core.mapper;
 
 
+import com.xboot.mybatis.core.support.entity.BaseEo;
 import io.mybatis.provider.EntityColumn;
 import io.mybatis.provider.EntityTable;
 import io.mybatis.provider.SqlScript;
@@ -207,5 +208,22 @@ public class ProviderTemplate<E extends BaseEo> {
         });
     }
 
+    public static String test(ProviderContext providerContext) {
+        return SqlScript.caching(providerContext, new SqlScript() {
+            @Override
+            public String getSql(EntityTable entity) {
+                String sql = "SELECT " + entity.baseColumnAsPropertyList() + "  FROM " + entity.table() + LF
+//                        + ifParameterNotNull(() ->
+//                        where(() ->
+//                                entity.whereColumns().stream().map(column ->
+//                                        ifTest(column.notNullTest(), () -> "AND " + column.columnEqualsProperty())
+//                                ).collect(Collectors.joining(LF)))
+//
+//                )
+                        + ifTest("criteria", () -> " and 1=1 ");
+                return sql;
+            }
+        });
+    }
 
 }

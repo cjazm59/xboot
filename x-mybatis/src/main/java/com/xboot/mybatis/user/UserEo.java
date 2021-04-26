@@ -2,7 +2,7 @@ package com.xboot.mybatis.user;
 
 import com.xboot.mybatis.core.annotation.Column;
 import com.xboot.mybatis.core.annotation.Table;
-import com.xboot.mybatis.core.base.BaseEo;
+import com.xboot.mybatis.core.support.entity.BaseEo;
 import lombok.Data;
 
 @Data

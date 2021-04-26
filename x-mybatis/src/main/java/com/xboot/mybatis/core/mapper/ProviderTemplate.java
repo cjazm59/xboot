@@ -213,17 +213,24 @@ public class ProviderTemplate<E extends BaseEo> {
             @Override
             public String getSql(EntityTable entity) {
                 String sql = "SELECT " + entity.baseColumnAsPropertyList() + "  FROM " + entity.table() + LF
-//                        + ifParameterNotNull(() ->
-//                        where(() ->
-//                                entity.whereColumns().stream().map(column ->
-//                                        ifTest(column.notNullTest(), () -> "AND " + column.columnEqualsProperty())
-//                                ).collect(Collectors.joining(LF)))
-//
-//                )
-                        + ifTest("criteria", () -> " and 1=1 ");
+                        + ifParameterNotNull(() ->
+                        where(() ->
+                                entity.whereColumns().stream().map(column ->
+                                        ifTest(column.notNullTest(), () -> "AND " + column.columnEqualsProperty())
+                                ).collect(Collectors.joining(LF))
+                                        + ifTest("criteria != null and and criteria.wheres!=null and criteria.wheres.size > 0", () -> EXAMPLE_WHERE)
+                                        + ifTest("criteria!=null and  criteria.orderBy !=null  ",
+                                        () -> " ORDER BY ${criteria.orderBy.order}  ${criteria.orderBy.orderBy}")
+                        )
+                );
                 return sql;
             }
         });
     }
+
+    public static final String EXAMPLE_WHERE =
+            "  <foreach collection=\"criteria.wheres\" item=\"wheres\" separator=\" and \">\n" +
+                    "  " +
+                    "  </foreach>";
 
 }

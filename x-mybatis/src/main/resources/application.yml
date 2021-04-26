@@ -20,5 +20,3 @@ mybatis:
 logging:
   level:
     com.xboot.mybatis: debug
-
-

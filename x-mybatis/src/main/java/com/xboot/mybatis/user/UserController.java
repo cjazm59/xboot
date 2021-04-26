@@ -22,9 +22,8 @@ public class UserController {
     public List<UserEo> selectOne() {
         UserEo u = new UserEo();
         u.setId(1L);
-        u.setCriteria(Criteria.build());
-//        UserDto userDto = userService.test(u);
-        List<UserEo> test = userMapper.test(u);
+        u.setCriteria(Criteria.build().orderByAsc("id"));
+        List<UserEo> test = userMapper.selectByExample(u);
         return test;
     }
 

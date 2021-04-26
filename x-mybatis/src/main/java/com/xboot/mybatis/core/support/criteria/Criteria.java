@@ -1,6 +1,7 @@
 package com.xboot.mybatis.core.support.criteria;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.util.CollectionUtils;
 
@@ -8,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Data
+@EqualsAndHashCode
 public class Criteria {
 
     private List<Where> wheres;

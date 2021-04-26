@@ -9,12 +9,12 @@ public class OrderBy {
 
     private String order;
 
+    private Order orderBy;
+
     public OrderBy(String order, Order orderBy) {
         this.order = order;
         this.orderBy = orderBy;
     }
-
-    private Order orderBy;
 
     public enum Order {
         ASC, DESC

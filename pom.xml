@@ -24,8 +24,9 @@
 
     <modules>
         <module>x-mybatis</module>
-        <module>x-message-api</module>
-        <module>x-lock-api</module>
+        <module>x-message</module>
+        <module>x-lock</module>
+        <module>x-cache</module>
     </modules>
 
     <dependencyManagement>

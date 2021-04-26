@@ -208,7 +208,7 @@ public class ProviderTemplate<E extends BaseEo> {
         });
     }
 
-    public static String test(ProviderContext providerContext) {
+    public static String selectByExample(ProviderContext providerContext) {
         return SqlScript.caching(providerContext, new SqlScript() {
             @Override
             public String getSql(EntityTable entity) {

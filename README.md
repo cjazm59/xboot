@@ -1,17 +1,17 @@
 # xboot
 
 #简介
-xboot脚手架,基于spring体系框架,为简化开发而创建
+xboot,基于spring体系框架,实现多种技术中间件适配,达到通过配置参数即可切换多种实现
 #
 
 #### 核心组件库
  * x-mybatis
- * x-message-api
- * x-lock-api
-
+ * x-message
+ * x-lock
+ * x-cache
 
 ### x-mybatis 
-   基于mybatis扩展,解放xml文件,只需简单使用注解,即可完成单表crud操作
+   基于mybatis实现增强,解放xml文件,只需简单使用注解,即可完成单表crud操作
 ```
 
 @Table("user")
@@ -25,9 +25,21 @@ public class UserEo extends BaseEo {
 @Mapper
 public interface UserMapper extends BaseMapper<UserEo, Long> {
 
+
 }
+
+//支持sql构造器
+UserEo query = new UserEo();
+Criteria criteria = Criteria.build()
+        .andLike("name", "%张%")
+        .andIn("id", "1,2,3");
+query.setCriteria(criteria);
+List<UserEo> userEos = userMapper.selectByExample(query);
+
 ```
-### x-message-api
-mq消息中间件
-### x-lock-api
-分布式锁
+### x-message
+消息队列适配
+### x-lock
+分布式锁适配
+### x-cahche
+缓存适配

@@ -113,8 +113,8 @@ public interface BaseMapper<E extends BaseEo, P extends Serializable> extends En
 
 
     @Lang(Caching.class)
-    @SelectProvider(type = ProviderTemplate.class, method = "test")
-    List<E> test(E entity);
+    @SelectProvider(type = ProviderTemplate.class, method = "selectByExample")
+    List<E> selectByExample(E entity);
 
 
 }

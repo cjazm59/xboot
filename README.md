@@ -66,4 +66,32 @@ public class OrderProcess implements IMessageHandle {
 ### x-lock
 分布式锁适配
 ### x-cahche
-缓存适配
+缓存适配,支持redis、guava-cache等组件
+```
+
+/**
+ * ------------------------------- 缓存使用 -------------------------------
+ public class Test{
+ 
+		@Autowired
+		private ICacheService cacheService;
+
+		@GetMapping(value="/put")
+		public R send() {
+            cacheService.put(new CacheKey("order:1","订单1111"));
+		    return R.data("ok");
+		}
+ }
+**/
+
+/**
+ * ------------------------------- yaml配置 -------------------------------
+ xboot:
+     cache:
+         type: redis
+         address: localhost:6379
+         enable: true
+         prefix: 
+ **/
+
+```

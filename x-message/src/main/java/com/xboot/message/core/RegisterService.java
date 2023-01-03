@@ -2,6 +2,7 @@ package com.xboot.message.core;
 
 
 import com.xboot.message.config.MqProperties;
+import com.xboot.message.constant.MqConstants;
 import com.xboot.message.core.adapter.kafka.KafkaConsumerAdapter;
 import com.xboot.message.core.adapter.kafka.KafkaProducerAdapter;
 import com.xboot.message.core.adapter.memory.MemoryConsumerAdapter;
@@ -14,8 +15,7 @@ import com.xboot.message.constant.MqType;
 import com.xboot.message.core.factory.ConsumerSerivceFactory;
 import com.xboot.message.core.factory.MessageHandleFactory;
 import com.xboot.message.core.factory.ProducerServiceFactory;
-import org.apache.commons.lang.StringUtils;
-import org.springblade.core.tool.utils.StringPool;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
@@ -46,12 +46,12 @@ public class RegisterService implements ApplicationContextAware, InitializingBea
 					StringBuffer sb = new StringBuffer(group);
 					String topic = mqConsumer.topic();
 					if (StringUtils.isNotBlank(topic)) {
-						sb.append(StringPool.DASH).append(topic);
+						sb.append(MqConstants.StringPoll.DASH).append(topic);
 					}
 
 					String tag = mqConsumer.tag();
 					if (StringUtils.isNotBlank(tag)) {
-						sb.append(StringPool.DASH).append(tag);
+						sb.append(MqConstants.StringPoll.DASH).append(tag);
 					}
 
 					String sendType = mqConsumer.type().name();

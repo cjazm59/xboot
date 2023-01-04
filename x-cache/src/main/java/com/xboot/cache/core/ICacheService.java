@@ -11,5 +11,6 @@ public interface ICacheService {
     void remove(String cacheKey);
 
     void remove(List<String> cacheKeys);
+    Boolean exists(String key);
 
 }

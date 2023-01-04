@@ -53,4 +53,12 @@ public class LocalCacheAdapter extends AbstCacheServiceImpl {
         }
     }
 
+    @Override
+    public Boolean exists(String key) {
+         if(get(key)!=null){
+             return false;
+         }
+        return true;
+    }
+
 }

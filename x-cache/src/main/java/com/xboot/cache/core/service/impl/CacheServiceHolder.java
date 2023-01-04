@@ -7,6 +7,7 @@ import com.xboot.cache.core.ICacheKey;
 import com.xboot.cache.core.ICacheService;
 import com.xboot.cache.core.adapter.LocalCacheAdapter;
 import com.xboot.cache.core.adapter.RedisCacheAdapter;
+import com.xboot.cache.excetion.CacheExcetion;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.ApplicationContext;
@@ -25,16 +26,19 @@ public class CacheServiceHolder implements ICacheService, InitializingBean, Appl
     public void afterPropertiesSet() {
         CacheProperties cacheProp = applicationContext.getBean(CacheProperties.class);
         CacheType cacheType = CacheType.findByName(cacheProp.getType());
-        if(cacheType==null){
-            throw new RuntimeException("cacheType ["+cacheProp.getType()+"] 未实现");
+        if (cacheType == null) {
+            throw new RuntimeException("cacheType [" + cacheProp.getType() + "] 未实现");
         }
         switch (cacheType) {
             case REDIS:
                 StringRedisTemplate redisTemplate = applicationContext.getBean(StringRedisTemplate.class);
-                cacheService  = new RedisCacheAdapter(cacheProp, redisTemplate);
+                if (redisTemplate == null) {
+                    throw new CacheExcetion("StringRedisTemplate未注入");
+                }
+                cacheService = new RedisCacheAdapter(cacheProp, redisTemplate);
                 break;
             case LOCAL:
-                cacheService  = new LocalCacheAdapter(cacheProp);
+                cacheService = new LocalCacheAdapter(cacheProp);
                 break;
             default:
         }
@@ -52,7 +56,7 @@ public class CacheServiceHolder implements ICacheService, InitializingBean, Appl
 
     @Override
     public void set(ICacheKey cacheKey) {
-         cacheService.set(cacheKey);
+        cacheService.set(cacheKey);
     }
 
     @Override
@@ -63,5 +67,10 @@ public class CacheServiceHolder implements ICacheService, InitializingBean, Appl
     @Override
     public void remove(List<String> cacheKeys) {
         cacheService.remove(cacheKeys);
+    }
+
+    @Override
+    public Boolean exists(String key) {
+        return cacheService.exists(key);
     }
 }

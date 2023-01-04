@@ -14,11 +14,8 @@ public class CacheProperties {
 
     private String type;
 
-    private String address;
-
     private Boolean enable = false;
     
     private String prefix;
-    
-    
+
 }

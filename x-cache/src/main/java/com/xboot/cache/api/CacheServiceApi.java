@@ -34,4 +34,9 @@ public class CacheServiceApi implements ICacheService {
     public void remove(List<String> cacheKeys) {
         cacheServiceHolder.remove(cacheKeys);
     }
+
+    @Override
+    public Boolean exists(String key) {
+        return null;
+    }
 }

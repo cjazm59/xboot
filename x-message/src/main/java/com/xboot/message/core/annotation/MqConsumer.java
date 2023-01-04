@@ -1,7 +1,7 @@
 package com.xboot.message.core.annotation;
 
 import com.xboot.message.constant.SendType;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
 import java.lang.annotation.*;
